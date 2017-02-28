@@ -1,5 +1,7 @@
 # gingerapplication
+
 Applicant name : Degi Kwag
+
 email : code at skyaperture dot com
 
 ## API list: 
@@ -21,6 +23,7 @@ email : code at skyaperture dot com
 Note : I created simple MVC framework without V (view) for brevity's sake. I also used Session as a DB for this framework. However, I think I misunderstood your requirements a little bit in some way like "person collection, group collection are separate entities with address book". So, with API, you would add person, group to addressbook, however there is no way of adding new person or group to Session DB at the first place. If you allow me a little more time, I would add View to this framework so HTML form will help to fill all the information a person or a group would need to be added. 
 One more thing to note, since I ran out of time, I couldn't approach this whole thing with TDD, which returend as a technical debt. I failed big time with ex post facto test using PHPUnit, and I think it would substantially consume more time, so I decided to stop here.
 I tested and they worked fine, however phpunit testing wasn't complete.
+I used an external module <a href="https://github.com/klein/klein.php">Klein</a> for routing
 
 notice: you need to enable apache2 rewrite module.
 
