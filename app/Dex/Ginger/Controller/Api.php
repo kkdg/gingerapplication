@@ -26,6 +26,10 @@ class Api
             new \Dex\Ginger\Controller\Api\Person($request);
         });
 
+        $klein->respond('GET', '/api/group/[:name]', function ($request) {
+            new \Dex\Ginger\Controller\Api\Group($request);
+        });
+
         /**
          * Main page
          * view is not included for brevity's sake

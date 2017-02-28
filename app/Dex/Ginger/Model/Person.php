@@ -20,7 +20,7 @@ class Person extends BaseModel
     /**
      * @var
      */
-    protected $lasttname;
+    protected $lastname;
 
     /**
      * @var array
@@ -42,16 +42,38 @@ class Person extends BaseModel
      */
     protected $groups;
 
+    /**
+     * @var
+     */
+    public $message;
+
 
     public function __construct($request = null) {
+        parent::__construct();
 
         if ( $request->name ) {
-            $this->load($request->name);
+            $person = $this->load($request->name);
+
         }
     }
 
     protected function load($name){
 
+        $person = $this->model->loadPerson($name);
+        if( $person['id'] == 0 ) {
+            $this->message = ['message' =>"No person found"];
+        } else {
+            $this->message = ['message' =>"Fetch Success"];
 
+            $this->firstname     = $person['firstname'];
+            $this->lastname      = $person['lastname'];
+            $this->address       = $person['address'];
+            $this->email         = $person['email'];
+            $this->phone_number  = $person['phone_number'];
+            $this->groups         = $person['group'];
+        }
+
+        $this->db = null;
+        $this->model = null;
     }
 }

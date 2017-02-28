@@ -28,6 +28,7 @@ class Person
 
         if ( $request != null ) {
             $this->person = new PersonModel($request);
+
         } else {
             $this->list = new PersonModelCollection();
         }
@@ -42,6 +43,6 @@ class Person
             $view = $this->list;
         }
 
-        var_dump($view);
+        print_r($view);
     }
 }
