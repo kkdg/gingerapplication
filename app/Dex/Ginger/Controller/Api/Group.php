@@ -28,6 +28,7 @@ class Group
             $this->group = new GroupModel($request);
 
         } else {
+            // @todo: Need to implement collection specific class
             $this->list = new GroupModelCollection();
         }
 

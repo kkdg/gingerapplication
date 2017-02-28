@@ -30,6 +30,7 @@ class Person
             $this->person = new PersonModel($route, $request);
 
         } else {
+            // @todo: Need to implement collection specific class
             $this->list = new PersonModelCollection();
         }
 
