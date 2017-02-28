@@ -67,8 +67,96 @@ class Model
         }
     }
 
-    protected function loadGroup($name) {
+    protected function loadPersonByEmail($name) {
 
+        $name = strtolower($name);
+
+        try {
+            foreach ($this->db['person'] as $person) {
+                $personEmailEntity = strtolower($person['email']);
+
+                $prefix = explode('@',$personEmailEntity)[0];
+                if ($personEmailEntity == $name
+                    || strpos($prefix, $name) !== false
+                ) {
+                    $groups = array();
+                    foreach ($person['group'] as $groupId) {
+                        foreach( $this->db['group'] as $groupEntity) {
+                            if ( $groupEntity['id'] == $groupId ) {
+                                $groups[] = $groupEntity;
+                            }
+                        }
+                    }
+                    $person['group'] = $groups;
+
+                    return $person;
+                }
+            }
+
+            return ['id' => 0];
+
+        } catch (Exception $e) {
+            var_dump($e->getMessage());
+        }
+    }
+
+
+    protected function loadGroup($name) {
+        $name = strtolower($name);
+
+        try {
+            foreach ($this->db['group'] as $group) {
+
+                if (strtolower($group['name']) == $name) {
+                    $members = array();
+                    foreach ($group['member'] as $memberId) {
+                        foreach( $this->db['person'] as $personEntity) {
+                            if ( $personEntity['id'] == $memberId ) {
+                                $members[] = $personEntity;
+                            }
+                        }
+                    }
+                    $group['member'] = $members;
+
+                    return $group;
+                }
+            }
+
+            return ['id' => 0];
+
+        } catch (Exception $e) {
+            var_dump($e->getMessage());
+        }
+    }
+
+    protected function listAddressBookInDB() {
+        return $this->db['address_book'];
+    }
+
+    protected function addGroupToBook($name) {
+        $group = $this->loadGroup($name);
+        try {
+            $this->db['address_book']['group'][] = $group;
+            $_SESSION['db']['address_book']['group'][] = $group;
+
+            return "Successfully Updated";
+        } catch (Exception $e) {
+            var_dump($e->getMessage());
+        }
+
+    }
+
+    protected function addPersonToBook($name) {
+        try {
+            $person = $this->loadPerson($name);
+            $this->db['address_book']['person'][] = $person;
+            $_SESSION['db']['address_book']['person'][] = $person;
+
+            return "Successfully Updated";
+
+        } catch (Exception $e) {
+            var_dump($e->getMessage());
+        }
     }
 
     protected function loadDb() {

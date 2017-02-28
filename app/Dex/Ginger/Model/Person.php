@@ -48,11 +48,13 @@ class Person extends BaseModel
     public $message;
 
 
-    public function __construct($request = null) {
+    public function __construct($route, $request = null) {
         parent::__construct();
 
-        if ( $request->name ) {
-            $person = $this->load($request->name);
+        if ( $route == 'email' ) {
+            $this->loadByEmail($request->name);
+        } else if ( $route == 'name' ) {
+            $this->load($request->name);
 
         }
     }
@@ -60,20 +62,36 @@ class Person extends BaseModel
     protected function load($name){
 
         $person = $this->model->loadPerson($name);
+
+        $this->setObject($person);
+    }
+
+    protected function loadByEmail($name) {
+
+        $person = $this->model->loadPersonByEmail($name);
+
+        $this->setObject($person);
+
+    }
+
+    protected function setObject($person) {
+
         if( $person['id'] == 0 ) {
             $this->message = ['message' =>"No person found"];
         } else {
             $this->message = ['message' =>"Fetch Success"];
 
-            $this->firstname     = $person['firstname'];
-            $this->lastname      = $person['lastname'];
-            $this->address       = $person['address'];
-            $this->email         = $person['email'];
-            $this->phone_number  = $person['phone_number'];
-            $this->groups         = $person['group'];
         }
+
+        $this->firstname     = $person['firstname'];
+        $this->lastname      = $person['lastname'];
+        $this->address       = $person['address'];
+        $this->email         = $person['email'];
+        $this->phone_number  = $person['phone_number'];
+        $this->groups        = $person['group'];
 
         $this->db = null;
         $this->model = null;
+
     }
 }

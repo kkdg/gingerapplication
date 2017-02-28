@@ -8,5 +8,10 @@
 
 namespace Dex\Ginger\Model\Address;
 
+use Dex\Ginger\Model\Address;
 use Psr\Log;
 
+class Collection extends Address
+{
+
+}

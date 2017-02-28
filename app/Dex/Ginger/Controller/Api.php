@@ -22,12 +22,36 @@ class Api
 
         $klein = new Klein();
 
-        $klein->respond('GET', '/api/person/[:name]', function ($request) {
-            new \Dex\Ginger\Controller\Api\Person($request);
+        $klein->respond('GET', '/api/person/name/[:name]', function ($request) {
+            new \Dex\Ginger\Controller\Api\Person('name',$request);
+        });
+
+        $klein->respond('GET', '/api/person/email/[:name]', function ($request) {
+            new \Dex\Ginger\Controller\Api\Person('email',$request);
         });
 
         $klein->respond('GET', '/api/group/[:name]', function ($request) {
             new \Dex\Ginger\Controller\Api\Group($request);
+        });
+
+        $klein->respond('GET', '/api/address/list', function ($request) {
+            new \Dex\Ginger\Controller\Api\Address($request);
+        });
+
+        /**
+         * Add group to address book
+         * You must provide group name which already exists in DB
+         */
+        $klein->respond('GET', '/api/address/group/[:name]', function ($request) {
+            new \Dex\Ginger\Controller\Api\Address($request, 'add_group');
+        });
+        
+        /**
+         * Add person to address book
+         * You must provide person name which already exists in DB
+         */
+        $klein->respond('GET', '/api/address/person/[:name]', function ($request) {
+            new \Dex\Ginger\Controller\Api\Address($request, 'add_person');
         });
 
         /**

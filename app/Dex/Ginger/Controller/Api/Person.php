@@ -24,10 +24,10 @@ class Person
      */
     protected $list = null;
 
-    public function __construct($request) {
+    public function __construct($route,$request) {
 
         if ( $request != null ) {
-            $this->person = new PersonModel($request);
+            $this->person = new PersonModel($route, $request);
 
         } else {
             $this->list = new PersonModelCollection();

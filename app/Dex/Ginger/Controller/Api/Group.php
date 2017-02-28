@@ -11,35 +11,32 @@ namespace Dex\Ginger\Controller\Api;
 
 
 use Dex\Ginger\Model\Group as GroupModel;
+use Dex\Ginger\Model\Group\Collection as GroupModelCollection;
 
 
 class Group
 {
-    /**
-     * @var PersonModel
-     */
+
     protected $group = null;
 
-    /**
-     * @var PersonModelCollection|null
-     */
+
     protected $list = null;
 
     public function __construct($request) {
 
         if ( $request != null ) {
-            $this->person = new PersonModel($request);
+            $this->group = new GroupModel($request);
 
         } else {
-            $this->list = new PersonModelCollection();
+            $this->list = new GroupModelCollection();
         }
 
         $this->_render();
     }
 
     protected function _render() {
-        if ( $this->person != null ) {
-            $view = $this->person;
+        if ( $this->group != null ) {
+            $view = $this->group;
         } else {
             $view = $this->list;
         }
