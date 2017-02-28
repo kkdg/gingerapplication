@@ -25,7 +25,7 @@ class Model
 
     public function __construct() {
 
-        if ( $_SESSION['db']['live'] != true ) { // you can reload DB with this statement
+        if ( isset($_SESSION['db']['live']) && $_SESSION['db']['live'] != true ) { // you can reload DB with this statement
             $this->buildFixture();
         }
         $this->loadDb();
@@ -160,7 +160,7 @@ class Model
     }
 
     protected function loadDb() {
-        $this->db = $_SESSION['db'];
+        $this->db = isset($_SESSION['db']) ? $_SESSION['db'] : null;
     }
 
     protected function buildFixture() {

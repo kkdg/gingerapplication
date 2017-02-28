@@ -8,6 +8,7 @@
 
 namespace Dex\Ginger\Model;
 
+require_once __DIR__ . '/Model.php';
 
 use Dex\Ginger\Model\Model as BaseModel;
 
@@ -24,15 +25,15 @@ class Address extends BaseModel
      */
     public $message;
 
-    public function __construct($request, $router = null) {
+    public function __construct($name, $router = null) {
         parent::__construct();
 
         if ( $router == null ) {
             $this->listAddressBook();
         } else if ( $router == 'add_group' ) {
-            $this->addGroup($request->name);
+            $this->addGroup($name);
         } else if ( $router == 'add_person' ) {
-            $this->addPerson($request->name);
+            $this->addPerson($name);
         }
     }
 

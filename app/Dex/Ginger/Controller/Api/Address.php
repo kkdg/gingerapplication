@@ -25,7 +25,7 @@ class Address
     public function __construct($request, $router = null) {
 
         if ( $request != null ) {
-            $this->addressBook = new AddressModel($request, $router);
+            $this->addressBook = new AddressModel($request->name, $router);
 
         } else {
             // @todo: Need to implement collection specific class
