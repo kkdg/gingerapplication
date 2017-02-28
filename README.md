@@ -6,12 +6,12 @@ email : code at skyaperture dot com
 
 ## API list: 
 
-1. /api/person/name/[name] : This api end will return person's information including groups he/she belongs to. [name] is variable.
-2. /api/person/email/[email] : This end will return person's information whose email is matched against given one.
-3. /api/group/name/[name] : This end will return group's information including members' information.
-4. /api/address/list : This will list the whole addressbook
-5. /api/address/group/[name] : This end will add a group to addressbook. You must provide a group name which already exists in DB
-6. /api/address/person/[name] : This end will add a person to addressbook. You must provide a person name which already exists in DB
+1. /api/person/name/[name] : This api end will return person's information including groups he/she belongs to. [name] is variable. ex) /api/person/name/robin
+2. /api/person/email/[email] : This end will return person's information whose email is matched against given one. ex) /api/person/email/piet
+3. /api/group/name/[name] : This end will return group's information including members' information. ex) /api/group/name/footbal
+4. /api/address/list : This will list the whole addressbook ex) /api/address/list
+5. /api/address/group/[name] : This end will add a group to addressbook. You must provide a group name which already exists in DB ex) /api/address/group/baseball
+6. /api/address/person/[name] : This end will add a person to addressbook. You must provide a person name which already exists in DB ex) /api/address/person/ruud
 
 ## Design for finding a person with email : 
 1. Set given email string to lowercase (strtolower)
