@@ -1,8 +1,8 @@
 # gingerapplication
-Ginger Application
 Applicant name : Degi Kwag
+email : code at skyaperture dot com
 
-API list: 
+## API list: 
 
 1. /api/person/name/[name] : This api end will return person's information including groups he/she belongs to. [name] is variable.
 2. /api/person/email/[email] : This end will return person's information whose email is matched against given one.
@@ -11,7 +11,7 @@ API list:
 5. /api/address/group/[name] : This end will add a group to addressbook. You must provide a group name which already exists in DB
 6. /api/address/person/[name] : This end will add a person to addressbook. You must provide a person name which already exists in DB
 
-Design for finding a person with email : 
+## Design for finding a person with email : 
 1. Set given email string to lowercase (strtolower)
 2. Fetch Person collection from database 
 3. Find position of the email string within each entity's email of fetched collection. (strpos)
